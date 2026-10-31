@@ -1,0 +1,19 @@
+# Core API
+fastapi>=0.110
+uvicorn>=0.29
+pydantic>=2.6
+python-dotenv>=1.0
+sqlalchemy>=2.0
+requests>=2.31
+
+# Local model + guardrails (Gemma 4 12B via Ollama)
+nemoguardrails>=0.24
+langchain-ollama>=0.2
+
+# Web research
+ddgs>=9.0
+
+# Optional capabilities (agents report them as unavailable when missing)
+# browser-use       # autonomous browsing
+# playwright        # headless page fetching
+# docling           # document parsing for the analysis API

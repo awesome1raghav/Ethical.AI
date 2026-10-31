@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ── Theme tokens ───────────────────────────────────────────────────────────
+   * The UI is built almost entirely from foreground-alpha over a base surface
+   * (bg-ink/5, border-ink/10, text-ink/40). That composites correctly in both
+   * directions: white-over-black lightens, black-over-cream darkens. So a
+   * single ink/surface pair drives the whole system and elevation keeps working
+   * without any per-component branching.
+   *
+   * :root is LIGHT. .dark overrides. Both are explicit -- no utility may rely
+   * on an inherited colour.
+   */
+  :root {
+    --page: 60 14% 96%;           /* page ground -- body only */
+    --surface: 0 0% 100%;         /* raised cards and panels */
+    --surface-raised: 0 0% 100%;
+    --ink: 0 0% 7%;               /* near-black foreground */
+    --brand: 0 0% 7%;             /* primary action fill */
+    --brand-ink: 60 14% 96%;      /* text on primary action */
+    --signal: 0 55% 50%;          /* alerts / destructive */
+    --grid-line: 0 0% 0%;         /* background grid, alpha applied below */
+    --grid-alpha: 0.035;
+    --glow-alpha: 0.04;
+
+    --background: var(--page);
+    --foreground: var(--ink);
+    --card: var(--surface-raised);
+    --card-foreground: var(--ink);
+    --popover: var(--surface-raised);
+    --popover-foreground: var(--ink);
+    --primary: var(--brand);
+    --primary-foreground: var(--brand-ink);
+    --secondary: 60 10% 92%;
+    --secondary-foreground: var(--ink);
+    --muted: 60 6% 45%;
+    --muted-foreground: 60 6% 45%;
+    --accent: 60 10% 92%;
+    --accent-foreground: var(--ink);
+    --destructive: var(--signal);
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 7%;
+    --input: 0 0% 7%;
+    --ring: 0 0% 7%;
+    --radius: 1.5rem;
+
+    /* Fluid Typography - System-wide scaling */
+    --font-hero: clamp(2rem, 5vw, 4.5rem);
+    --font-h1: clamp(1.75rem, 4vw, 3rem);
+    --font-h2: clamp(1.25rem, 3vw, 2.25rem);
+    --font-h3: clamp(1rem, 2vw, 1.4rem);
+    --font-body: clamp(0.875rem, 1vw, 1rem);
+    --font-micro: clamp(0.65rem, 0.8vw, 0.8rem);
+  }
+
+  .dark {
+    --page: 0 0% 1%;
+    --surface: 0 0% 4%;
+    --surface-raised: 0 0% 6%;
+    --ink: 0 0% 100%;
+    --brand: 0 0% 100%;
+    --brand-ink: 0 0% 0%;
+    --signal: 0 57% 62%;
+    --grid-line: 0 0% 100%;
+    --grid-alpha: 0.02;
+    --glow-alpha: 0.03;
+
+    --secondary: 0 0% 7%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 10% 71%;
+    --muted-foreground: 210 10% 71%;
+    --accent: 0 0% 7%;
+    --accent-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --input: 0 0% 100%;
+    --ring: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-color: hsl(var(--page));
+    background-image:
+      radial-gradient(circle at center, hsl(var(--grid-line) / var(--glow-alpha)) 0%, transparent 60%),
+      linear-gradient(hsl(var(--grid-line) / var(--grid-alpha)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-line) / var(--grid-alpha)) 1px, transparent 1px);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    background-position: center center, center center, center center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+}
+
+.text-fluid-hero { font-size: var(--font-hero); }
+.text-fluid-h1 { font-size: var(--font-h1); }
+.text-fluid-h2 { font-size: var(--font-h2); }
+.text-fluid-h3 { font-size: var(--font-h3); }
+.text-fluid-body { font-size: var(--font-body); }
+.text-fluid-micro { font-size: var(--font-micro); }
+
+.stealth-glass {
+  background: hsl(var(--ink) / 0.025);
+  backdrop-filter: blur(14px);
+  border: 1px solid hsl(var(--ink) / 0.06);
+}
+
+.luxury-surface {
+  background: hsl(var(--ink) / 0.02);
+  border: 1px solid hsl(var(--ink) / 0.08);
+}
+
+.hover-surface {
+  @apply transition-all duration-300;
+}
+
+.hover-surface:hover {
+  background: hsl(var(--ink) / 0.04);
+  border-color: hsl(var(--ink) / 0.14);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  /* Plain CSS: @apply cannot resolve an alpha modifier on a var-backed colour. */
+  background-color: hsl(var(--ink) / 0.2);
+  border-radius: 9999px;
+  transition: background-color 150ms ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--ink) / 0.35);
+}
+
+/* Fluid Spacing Utility Classes */
+.p-fluid-outer { padding: clamp(1rem, 3vw, 3rem); }
+.p-fluid-inner { padding: clamp(1rem, 2vw, 1.5rem); }
+.m-fluid-outer { margin: clamp(1rem, 3vw, 3rem); }
+.gap-fluid { gap: clamp(1rem, 1.5vw, 2rem); }
+
+/* Machined Button Premium Styles (Monochrome) */
+.nexus-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 8px; /* Sleeker than full pill */
+  background: hsl(var(--brand));
+  border: 1px solid hsl(var(--brand));
+  color: hsl(var(--brand-ink));
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 200ms ease;
+  box-shadow: 0 1px 2px hsl(var(--page) / 0.35);
+}
+
+.nexus-button .text {
+  position: relative;
+  z-index: 2;
+  transition: transform 300ms ease;
+}
+
+.nexus-button svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  opacity: 0.75;
+  z-index: 2;
+  transition: transform 300ms ease, stroke 300ms ease;
+}
+
+/* subtle hover highlight */
+.nexus-button:hover {
+  background: hsl(var(--brand) / 0.88);
+  box-shadow: 0 4px 12px hsl(var(--ink) / 0.25);
+  transform: translateY(-1px);
+}
+
+.nexus-button:hover svg {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+/* click feedback */
+.nexus-button:active {
+  transform: scale(0.98);
+  box-shadow: inset 0 2px 4px hsl(var(--ink) / 0.3);
+}
+
+/* disabled */
+.nexus-button:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

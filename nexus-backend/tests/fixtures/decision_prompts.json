@@ -1,0 +1,327 @@
+{
+  "_comment": "Labelled prompts for the Decision Engine eval harness. expected_intent uses the IntentType taxonomy (CHAT/RESEARCH/CODING/FILE/AUTOMATION). expected_mode uses the target taxonomy (CHAT/MISSION); the current ExecutionModeRouter emits AGENT, which the adapter maps to MISSION. Cases tagged ch4.5 are the specification's own examples.",
+  "cases": [
+    {
+      "prompt": "Explain Python",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "ch4.5",
+        "relabelled"
+      ],
+      "note": "Relabelled from CODING to CHAT. intent selects capability/model; a definitional question needs no special capability regardless of subject. Keeping CODING made the fixture inconsistent with \"What is a research paper?\"->CHAT and \"Tell me about the file system\"->CHAT. Mode stays CHAT either way, which is all Ch. 4.5 actually asserts."
+    },
+    {
+      "prompt": "Solve an equation",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "ch4.5"
+      ]
+    },
+    {
+      "prompt": "Summarize this paragraph",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "ch4.5"
+      ]
+    },
+    {
+      "prompt": "Research AI Governance",
+      "expected_intent": "RESEARCH",
+      "expected_mode": "MISSION",
+      "tags": [
+        "ch4.5"
+      ]
+    },
+    {
+      "prompt": "Create a presentation",
+      "expected_intent": "FILE",
+      "expected_mode": "MISSION",
+      "tags": [
+        "ch4.5"
+      ]
+    },
+    {
+      "prompt": "Generate a project report",
+      "expected_intent": "FILE",
+      "expected_mode": "MISSION",
+      "tags": [
+        "ch4.5"
+      ]
+    },
+    {
+      "prompt": "Build a dashboard",
+      "expected_intent": "CODING",
+      "expected_mode": "MISSION",
+      "tags": [
+        "ch4.5"
+      ]
+    },
+    {
+      "prompt": "Analyze multiple documents",
+      "expected_intent": "FILE",
+      "expected_mode": "MISSION",
+      "tags": [
+        "ch4.5"
+      ]
+    },
+    {
+      "prompt": "Find the bug in my python code",
+      "expected_intent": "CODING",
+      "expected_mode": "CHAT",
+      "tags": [
+        "keyword-trap"
+      ]
+    },
+    {
+      "prompt": "Search my codebase for deprecated API calls",
+      "expected_intent": "CODING",
+      "expected_mode": "MISSION",
+      "tags": [
+        "keyword-trap"
+      ]
+    },
+    {
+      "prompt": "Compare these two functions for me",
+      "expected_intent": "CODING",
+      "expected_mode": "CHAT",
+      "tags": [
+        "keyword-trap"
+      ]
+    },
+    {
+      "prompt": "What is a research paper?",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "keyword-trap"
+      ]
+    },
+    {
+      "prompt": "Explain how automation works",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "keyword-trap"
+      ]
+    },
+    {
+      "prompt": "Tell me about the file system",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "keyword-trap"
+      ]
+    },
+    {
+      "prompt": "How do I read a PDF in python?",
+      "expected_intent": "CODING",
+      "expected_mode": "CHAT",
+      "tags": [
+        "keyword-trap"
+      ]
+    },
+    {
+      "prompt": "What is the capital of France?",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "clear-chat"
+      ]
+    },
+    {
+      "prompt": "Thanks, that helped",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "clear-chat"
+      ]
+    },
+    {
+      "prompt": "Rewrite this sentence to be more concise",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "clear-chat"
+      ]
+    },
+    {
+      "prompt": "What's the difference between TCP and UDP?",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "clear-chat"
+      ]
+    },
+    {
+      "prompt": "What does this error message mean?",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "clear-chat"
+      ]
+    },
+    {
+      "prompt": "Research About Quantum Computing",
+      "expected_intent": "RESEARCH",
+      "expected_mode": "MISSION",
+      "tags": [
+        "screenshot"
+      ]
+    },
+    {
+      "prompt": "Research the competitive landscape for AI governance tooling and produce a summary",
+      "expected_intent": "RESEARCH",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Investigate why our latency spiked last week and report the findings",
+      "expected_intent": "RESEARCH",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Find and compare the top 5 vector databases",
+      "expected_intent": "RESEARCH",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Do a deep dive on quantum computing hardware vendors",
+      "expected_intent": "RESEARCH",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Refactor the authentication service to use JWT",
+      "expected_intent": "CODING",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Migrate this project from JavaScript to TypeScript",
+      "expected_intent": "CODING",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Add unit tests across the payments module",
+      "expected_intent": "CODING",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Fix this typo in my README",
+      "expected_intent": "CODING",
+      "expected_mode": "CHAT",
+      "tags": [
+        "complexity-pair"
+      ]
+    },
+    {
+      "prompt": "Convert these invoices to a spreadsheet",
+      "expected_intent": "FILE",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Extract the tables from this PDF",
+      "expected_intent": "FILE",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Automate our weekly deployment workflow",
+      "expected_intent": "AUTOMATION",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Set up an agent that monitors our error logs",
+      "expected_intent": "AUTOMATION",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Schedule a daily backup job",
+      "expected_intent": "AUTOMATION",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    },
+    {
+      "prompt": "Explain what a dashboard is",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "complexity-pair"
+      ]
+    },
+    {
+      "prompt": "Summarize this one paragraph",
+      "expected_intent": "CHAT",
+      "expected_mode": "CHAT",
+      "tags": [
+        "complexity-pair"
+      ]
+    },
+    {
+      "prompt": "Summarize all 200 documents in this folder and produce a report",
+      "expected_intent": "FILE",
+      "expected_mode": "MISSION",
+      "tags": [
+        "complexity-pair"
+      ]
+    },
+    {
+      "prompt": "Write a hello world in python",
+      "expected_intent": "CODING",
+      "expected_mode": "CHAT",
+      "tags": [
+        "complexity-pair"
+      ]
+    },
+    {
+      "prompt": "Build a full REST API with auth, tests and docs",
+      "expected_intent": "CODING",
+      "expected_mode": "MISSION",
+      "tags": [
+        "complexity-pair"
+      ]
+    },
+    {
+      "prompt": "Deploy the staging environment and run a smoke test",
+      "expected_intent": "AUTOMATION",
+      "expected_mode": "MISSION",
+      "tags": [
+        "clear-mission"
+      ]
+    }
+  ]
+}

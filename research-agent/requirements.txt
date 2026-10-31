@@ -1,0 +1,9 @@
+fastapi>=0.110
+uvicorn>=0.29
+pydantic>=2.6
+langchain-core>=0.3
+langchain-ollama>=0.2
+langgraph>=0.2.55
+ddgs>=9.0
+beautifulsoup4>=4.12
+tavily-python>=0.5  # optional: only used when SEARCH_API=tavily

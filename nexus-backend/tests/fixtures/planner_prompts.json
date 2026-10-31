@@ -1,0 +1,162 @@
+{
+  "_comment": "Planner evaluation fixture. Each case declares the category, the shape a competent plan should have, and the operations it must recognise. expected_min/max_steps are ranges, not exact counts -- the planner should be judged on proportionality, not on matching a hand-written script.",
+  "cases": [
+    {
+      "id": "trivial_coding",
+      "category": "trivial coding",
+      "prompt": "Fix this typo in my README.",
+      "expected_min_steps": 2,
+      "expected_max_steps": 5,
+      "must_include_ops": [
+        "READ_FILE",
+        "WRITE_FILE"
+      ],
+      "must_be_destructive": false,
+      "killer_trio": true,
+      "must_touch": [
+        "filesystem_write"
+      ]
+    },
+    {
+      "id": "moderate_coding",
+      "category": "moderate coding",
+      "prompt": "Build a full REST API with authentication, tests and documentation.",
+      "expected_min_steps": 6,
+      "expected_max_steps": 12,
+      "must_include_ops": [
+        "IMPLEMENT",
+        "RUN_TESTS"
+      ],
+      "must_be_destructive": false,
+      "killer_trio": true,
+      "must_touch": [
+        "filesystem_write",
+        "code_execution"
+      ]
+    },
+    {
+      "id": "complex_coding",
+      "category": "complex coding",
+      "prompt": "Migrate this entire JavaScript project to TypeScript.",
+      "expected_min_steps": 5,
+      "expected_max_steps": 12,
+      "must_include_ops": [
+        "READ_FILE",
+        "IMPLEMENT",
+        "RUN_TESTS"
+      ],
+      "must_be_destructive": false,
+      "killer_trio": true,
+      "must_touch": [
+        "filesystem_write",
+        "code_execution"
+      ]
+    },
+    {
+      "id": "research",
+      "category": "research",
+      "prompt": "Research quantum computing and create a report.",
+      "expected_min_steps": 4,
+      "expected_max_steps": 9,
+      "must_include_ops": [
+        "NETWORK_REQUEST",
+        "GENERATE_ARTIFACT"
+      ],
+      "must_be_destructive": false,
+      "must_touch": [
+        "network_access"
+      ]
+    },
+    {
+      "id": "doc_synthesis",
+      "category": "document synthesis",
+      "prompt": "Read these documents, compare them, identify contradictions, and create a final report.",
+      "expected_min_steps": 4,
+      "expected_max_steps": 9,
+      "must_include_ops": [
+        "READ_FILE",
+        "GENERATE_ARTIFACT"
+      ],
+      "must_be_destructive": false,
+      "must_touch": [
+        "filesystem_read"
+      ]
+    },
+    {
+      "id": "filesystem_op",
+      "category": "filesystem operation",
+      "prompt": "Rename all the .txt files in the reports folder to .md",
+      "expected_min_steps": 2,
+      "expected_max_steps": 6,
+      "must_include_ops": [
+        "READ_FILE",
+        "WRITE_FILE"
+      ],
+      "must_be_destructive": false,
+      "must_touch": [
+        "filesystem_write"
+      ]
+    },
+    {
+      "id": "destructive",
+      "category": "destructive operation",
+      "prompt": "Delete the production database and rebuild authentication.",
+      "expected_min_steps": 3,
+      "expected_max_steps": 10,
+      "must_include_ops": [
+        "DATABASE_DELETE"
+      ],
+      "must_be_destructive": true,
+      "must_require_approval": true,
+      "must_touch": [
+        "destructive",
+        "database_write"
+      ]
+    },
+    {
+      "id": "multi_phase",
+      "category": "multi-phase mission",
+      "prompt": "Research our competitors, build a comparison dashboard, write documentation and deploy it.",
+      "expected_min_steps": 8,
+      "expected_max_steps": 16,
+      "must_include_ops": [
+        "NETWORK_REQUEST",
+        "IMPLEMENT",
+        "DEPLOY"
+      ],
+      "must_be_destructive": false,
+      "must_require_approval": true,
+      "must_touch": [
+        "network_access",
+        "external_side_effect"
+      ]
+    },
+    {
+      "id": "ambiguous",
+      "category": "ambiguous mission",
+      "prompt": "make it better",
+      "expected_min_steps": 0,
+      "expected_max_steps": 3,
+      "must_include_ops": [],
+      "must_be_destructive": false,
+      "must_touch": []
+    },
+    {
+      "id": "mixed_capability",
+      "category": "mixed-capability mission",
+      "prompt": "Analyze these sales spreadsheets and build a dashboard showing the trends.",
+      "expected_min_steps": 4,
+      "expected_max_steps": 10,
+      "must_include_ops": [
+        "READ_FILE",
+        "IMPLEMENT"
+      ],
+      "must_be_destructive": false,
+      "must_touch": [
+        "filesystem_read",
+        "filesystem_write"
+      ]
+    }
+  ],
+  "_amendment": "must_include_ops originally demanded a literal WRITE_FILE for IMPLEMENT-based missions. IMPLEMENT declares filesystem_write in its risk surface, so that assertion tested vocabulary rather than behaviour. Corrected, and must_touch added as a stronger semantic assertion on the declared risk surface."
+}

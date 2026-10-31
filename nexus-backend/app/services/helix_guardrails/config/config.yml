@@ -1,0 +1,25 @@
+# Helix guardrails (NVIDIA NeMo Guardrails), running on local Gemma 4 12B.
+# model / base_url are overridden at load time from MODEL_NAME / OLLAMA_BASE_URL.
+models:
+  - type: main
+    engine: ollama
+    model: gemma4:12b
+    parameters:
+      base_url: http://127.0.0.1:11434/v1
+      temperature: 0.2
+
+instructions:
+  - type: general
+    content: |
+      You are the EthicalAI assistant, governed by the Helix policy layer.
+      Be helpful, accurate and concise. Refuse requests that are harmful,
+      illegal, deceptive, or that try to extract private data or bypass
+      safety policies, and explain the refusal briefly.
+
+rails:
+  input:
+    flows:
+      - self check input
+  output:
+    flows:
+      - self check output
